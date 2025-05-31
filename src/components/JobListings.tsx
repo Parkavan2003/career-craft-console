@@ -8,7 +8,6 @@ export const JobListings = () => {
   const { jobs, isLoading, error } = useJobs();
   const [filteredJobs, setFilteredJobs] = useState(jobs);
 
-  // Update filtered jobs when jobs change
   React.useEffect(() => {
     setFilteredJobs(jobs);
   }, [jobs]);
@@ -36,7 +35,7 @@ export const JobListings = () => {
     if (filters.salaryRange) {
       filtered = filtered.filter(job => {
         if (!job.salary_min || !job.salary_max) return true;
-        const minSalary = job.salary_min / 1000; // Convert to thousands
+        const minSalary = job.salary_min / 1000;
         const maxSalary = job.salary_max / 1000;
         return minSalary >= filters.salaryRange[0] && maxSalary <= filters.salaryRange[1];
       });
@@ -47,16 +46,21 @@ export const JobListings = () => {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <JobFilters onFilterChange={handleFilterChange} />
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[...Array(8)].map((_, i) => (
-            <div key={i} className="bg-white p-6 rounded-lg shadow-sm border animate-pulse">
-              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-              <div className="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
-              <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
-              <div className="h-3 bg-gray-200 rounded w-2/3 mb-4"></div>
-              <div className="h-10 bg-gray-200 rounded"></div>
+            <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 animate-pulse">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 rounded-xl mr-3"></div>
+                <div className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">
+                  <div className="h-3 bg-gray-200 rounded w-12"></div>
+                </div>
+              </div>
+              <div className="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+              <div className="h-10 bg-gray-200 rounded-lg"></div>
             </div>
           ))}
         </div>
@@ -66,7 +70,7 @@ export const JobListings = () => {
 
   if (error) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <JobFilters onFilterChange={handleFilterChange} />
         <div className="text-center py-12">
           <p className="text-red-600">Error loading jobs. Please try again.</p>
@@ -76,14 +80,14 @@ export const JobListings = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <JobFilters onFilterChange={handleFilterChange} />
       {filteredJobs.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-500">No jobs found. {jobs.length === 0 ? 'Be the first to create a job posting!' : 'Try adjusting your filters.'}</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredJobs.map((job) => (
             <JobCard key={job.id} job={job} />
           ))}

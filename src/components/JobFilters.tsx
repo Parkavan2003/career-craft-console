@@ -14,7 +14,7 @@ export const JobFilters = ({ onFilterChange }: JobFiltersProps) => {
     jobTitle: '',
     location: '',
     jobType: 'all',
-    salaryRange: [50, 80]
+    salaryRange: [30, 150]
   });
 
   const handleFilterUpdate = (key: string, value: any) => {
@@ -57,8 +57,8 @@ export const JobFilters = ({ onFilterChange }: JobFiltersProps) => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="FullTime">Full Time</SelectItem>
-              <SelectItem value="PartTime">Part Time</SelectItem>
+              <SelectItem value="Full Time">Full Time</SelectItem>
+              <SelectItem value="Part Time">Part Time</SelectItem>
               <SelectItem value="Contract">Contract</SelectItem>
               <SelectItem value="Internship">Internship</SelectItem>
             </SelectContent>
@@ -74,9 +74,9 @@ export const JobFilters = ({ onFilterChange }: JobFiltersProps) => {
             <Slider
               value={filters.salaryRange}
               onValueChange={(value) => handleFilterUpdate('salaryRange', value)}
-              max={100}
+              max={200}
               min={20}
-              step={5}
+              step={10}
               className="w-full"
             />
           </div>

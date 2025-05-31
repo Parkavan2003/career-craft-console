@@ -1,0 +1,107 @@
+
+export const mockJobs = [
+  {
+    id: '1',
+    title: 'Full Stack Developer',
+    company: 'Amazon',
+    location: 'Chennai',
+    type: 'FullTime',
+    salary: '70k-80k',
+    experience: '2+ 1-3 yr Exp',
+    postedDays: '24h Ago',
+    logo: 'amazon',
+    isOnsite: true,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  },
+  {
+    id: '2',
+    title: 'Node Js Developer',
+    company: 'Tesla',
+    location: 'Bangalore',
+    type: 'FullTime',
+    salary: '60k-75k',
+    experience: '2+ 1-3 yr Exp',
+    postedDays: '24h Ago',
+    logo: 'tesla',
+    isOnsite: true,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  },
+  {
+    id: '3',
+    title: 'UX/UI Designer',
+    company: 'Figma',
+    location: 'Mumbai',
+    type: 'FullTime',
+    salary: '55k-70k',
+    experience: '2+ 1-3 yr Exp',
+    postedDays: '24h Ago',
+    logo: 'figma',
+    isOnsite: true,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  },
+  {
+    id: '4',
+    title: 'Full Stack Developer',
+    company: 'Amazon',
+    location: 'Delhi',
+    type: 'FullTime',
+    salary: '65k-85k',
+    experience: '2+ 1-3 yr Exp',
+    postedDays: '24h Ago',
+    logo: 'amazon',
+    isOnsite: true,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  },
+  {
+    id: '5',
+    title: 'Node Js Developer',
+    company: 'Tesla',
+    location: 'Pune',
+    type: 'PartTime',
+    salary: '45k-60k',
+    experience: '2+ 1-3 yr Exp',
+    postedDays: '24h Ago',
+    logo: 'tesla',
+    isOnsite: false,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  },
+  {
+    id: '6',
+    title: 'UX/UI Designer',
+    company: 'Figma',
+    location: 'Hyderabad',
+    type: 'Contract',
+    salary: '50k-65k',
+    experience: '2+ 1-3 yr Exp',
+    postedDays: '24h Ago',
+    logo: 'figma',
+    isOnsite: true,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  },
+  {
+    id: '7',
+    title: 'Full Stack Developer',
+    company: 'Amazon',
+    location: 'Kolkata',
+    type: 'Internship',
+    salary: '30k-45k',
+    experience: '0-1 yr Exp',
+    postedDays: '24h Ago',
+    logo: 'amazon',
+    isOnsite: true,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  },
+  {
+    id: '8',
+    title: 'Node Js Developer',
+    company: 'Tesla',
+    location: 'Gurgaon',
+    type: 'FullTime',
+    salary: '75k-90k',
+    experience: '3+ yr Exp',
+    postedDays: '24h Ago',
+    logo: 'tesla',
+    isOnsite: true,
+    description: 'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on interests and travel style, and create personalized travel plans.'
+  }
+];

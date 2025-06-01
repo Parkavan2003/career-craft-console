@@ -1,119 +1,99 @@
 
 import React from 'react';
-import { MapPin, Clock, DollarSign, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { MapPin, Users, Clock } from 'lucide-react';
+import { Job } from '@/hooks/useJobs';
 
 interface JobCardProps {
-  job: {
-    id: string;
-    job_title: string;
-    company_name: string;
-    location: string;
-    job_type: string;
-    salary_min?: number;
-    salary_max?: number;
-    experience_required?: string;
-    job_description?: string;
-    created_at: string;
-  };
+  job: Job;
 }
 
-export const JobCard: React.FC<JobCardProps> = ({ job }) => {
-  const formatSalary = (min?: number, max?: number) => {
-    if (!min && !max) return 'Not disclosed';
-    if (min && max) return `₹${min/100000}L - ₹${max/100000}L`;
-    if (min) return `₹${min/100000}L+`;
-    return `Up to ₹${max!/100000}L`;
+export const JobCard = ({ job }: JobCardProps) => {
+  const formatSalary = (min: number | null, max: number | null) => {
+    if (!min && !max) return 'Salary not specified';
+    if (min && max) return `₹${(min/100000).toFixed(1)}L - ₹${(max/100000).toFixed(1)}L`;
+    if (min) return `₹${(min/100000).toFixed(1)}L+`;
+    if (max) return `Up to ₹${(max/100000).toFixed(1)}L`;
+    return 'Salary not specified';
   };
 
-  const getTimeAgo = (dateString: string) => {
+  const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
-    if (diffInHours < 24) {
-      return `${diffInHours}h ago`;
-    } else {
-      const diffInDays = Math.floor(diffInHours / 24);
-      return `${diffInDays}d ago`;
-    }
+    if (diffDays === 1) return '24h Ago';
+    return `${diffDays}d Ago`;
   };
 
-  // Generate company logo using UI Avatars service
-  const companyLogoUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(job.company_name)}&background=1f2937&color=ffffff&size=40&bold=true&format=png`;
+  const getCompanyInitial = (companyName: string) => {
+    return companyName.charAt(0).toUpperCase();
+  };
+
+  // Generate a deterministic company logo URL based on company name
+  const getCompanyLogoUrl = (companyName: string) => {
+    const logoSize = 48;
+    const encodedName = encodeURIComponent(companyName);
+    return `https://ui-avatars.com/api/?name=${encodedName}&size=${logoSize}&background=2563eb&color=ffffff&bold=true&format=png&rounded=true`;
+  };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
-      {/* Header with logo and time */}
-      <div className="flex items-start justify-between mb-4">
+    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 font-['Inter',_sans-serif]">
+      {/* Header with Logo and Date */}
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center overflow-hidden shadow-lg">
             <img 
-              src={companyLogoUrl}
+              src={getCompanyLogoUrl(job.company_name)}
               alt={`${job.company_name} logo`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-xl"
               onError={(e) => {
-                // Fallback to text initial if image fails
+                // Fallback to styled initial if image fails to load
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
                 const parent = target.parentElement;
                 if (parent) {
-                  parent.innerHTML = `<span class="text-white font-bold text-sm">${job.company_name.charAt(0).toUpperCase()}</span>`;
+                  parent.innerHTML = `<span class="text-white font-bold text-lg">${getCompanyInitial(job.company_name)}</span>`;
                 }
               }}
             />
           </div>
-          <div>
-            <h3 className="font-semibold text-lg text-gray-900">{job.job_title}</h3>
-            <p className="text-sm text-gray-600">{job.company_name}</p>
-          </div>
         </div>
-        <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">
-          {getTimeAgo(job.created_at)}
-        </span>
+        <Badge className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-medium border-0 hover:bg-blue-50">
+          {formatDate(job.created_at)}
+        </Badge>
       </div>
-
-      {/* Job details */}
-      <div className="space-y-3 mb-4">
-        <div className="flex items-center space-x-6 text-sm text-gray-600">
-          <div className="flex items-center space-x-1">
-            <Briefcase className="w-4 h-4" />
-            <span>{job.experience_required || '0-2 yrs'}</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <MapPin className="w-4 h-4" />
-            <span>{job.location}</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <Clock className="w-4 h-4" />
-            <span>{job.job_type}</span>
-          </div>
+      
+      {/* Job Title */}
+      <h3 className="font-bold text-lg text-gray-900 mb-3 leading-tight">
+        {job.job_title}
+      </h3>
+      
+      {/* Experience, Work Type, and Salary */}
+      <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+        <div className="flex items-center">
+          <Users className="h-4 w-4 mr-1.5 text-gray-500" />
+          <span className="font-medium">1-3 yr Exp</span>
         </div>
-        
-        <div className="flex items-center space-x-1 text-sm">
-          <DollarSign className="w-4 h-4 text-gray-600" />
-          <span className="font-medium text-gray-900">{formatSalary(job.salary_min, job.salary_max)}</span>
+        <div className="flex items-center">
+          <MapPin className="h-4 w-4 mr-1.5 text-gray-500" />
+          <span className="font-medium">Onsite</span>
+        </div>
+        <div className="flex items-center">
+          <Clock className="h-4 w-4 mr-1.5 text-gray-500" />
+          <span className="font-medium">12LPA</span>
         </div>
       </div>
-
-      {/* Job description */}
-      {job.job_description && (
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-          {job.job_description}
-        </p>
-      )}
-
-      {/* Apply button */}
-      <Button 
-        className="w-full text-white font-medium py-2 rounded-lg transition-colors duration-200"
-        style={{ backgroundColor: '#00AAFF' }}
-        onMouseEnter={(e) => {
-          (e.target as HTMLButtonElement).style.backgroundColor = '#0099ee';
-        }}
-        onMouseLeave={(e) => {
-          (e.target as HTMLButtonElement).style.backgroundColor = '#00AAFF';
-        }}
-      >
+      
+      {/* Job Description */}
+      <p className="text-sm text-gray-600 mb-6 leading-relaxed line-clamp-3">
+        {job.job_description || "Join our dynamic team and work on cutting-edge projects using modern technologies. We offer great learning opportunities, collaborative environment, and competitive compensation."}
+      </p>
+      
+      {/* Apply Button */}
+      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl h-12 font-semibold transition-colors text-sm">
         Apply Now
       </Button>
     </div>

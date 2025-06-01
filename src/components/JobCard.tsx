@@ -34,10 +34,9 @@ export const JobCard = ({ job }: JobCardProps) => {
 
   // Generate a deterministic company logo URL based on company name
   const getCompanyLogoUrl = (companyName: string) => {
-    // Use a placeholder service or you can replace with actual company logos
     const logoSize = 48;
     const encodedName = encodeURIComponent(companyName);
-    return `https://ui-avatars.com/api/?name=${encodedName}&size=${logoSize}&background=1f2937&color=ffffff&bold=true&format=png`;
+    return `https://ui-avatars.com/api/?name=${encodedName}&size=${logoSize}&background=2563eb&color=ffffff&bold=true&format=png&rounded=true`;
   };
 
   return (
@@ -45,13 +44,13 @@ export const JobCard = ({ job }: JobCardProps) => {
       {/* Header with Logo and Date */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center overflow-hidden shadow-lg">
             <img 
               src={getCompanyLogoUrl(job.company_name)}
               alt={`${job.company_name} logo`}
               className="w-full h-full object-cover rounded-xl"
               onError={(e) => {
-                // Fallback to initial if image fails to load
+                // Fallback to styled initial if image fails to load
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
                 const parent = target.parentElement;

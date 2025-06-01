@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +98,16 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Remove outline from all inputs */
+  input, textarea, select {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    outline: none !important;
+    box-shadow: none !important;
   }
 }

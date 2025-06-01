@@ -75,8 +75,8 @@ export const CreateJobModal = ({ isOpen, onClose }: CreateJobModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl border-0 shadow-2xl p-0">
-        <div className="px-8 py-6">
+      <DialogContent className="max-w-2xl h-[90vh] bg-white rounded-2xl border-0 shadow-2xl p-0 overflow-hidden">
+        <div className="px-8 py-6 h-full overflow-y-auto">
           <DialogHeader className="mb-8">
             <DialogTitle className="text-xl font-semibold text-gray-900 text-center">
               Create Job Opening

@@ -14,13 +14,17 @@ export type Database = {
           application_deadline: string | null
           company_name: string
           created_at: string
+          employment_type: string | null
+          experience: string | null
           id: string
           job_description: string | null
           job_title: string
           job_type: string
           location: string
+          posted_time: string | null
           requirements: string | null
           responsibilities: string | null
+          salary: string | null
           salary_max: number | null
           salary_min: number | null
           updated_at: string
@@ -29,13 +33,17 @@ export type Database = {
           application_deadline?: string | null
           company_name: string
           created_at?: string
+          employment_type?: string | null
+          experience?: string | null
           id?: string
           job_description?: string | null
           job_title: string
           job_type: string
           location: string
+          posted_time?: string | null
           requirements?: string | null
           responsibilities?: string | null
+          salary?: string | null
           salary_max?: number | null
           salary_min?: number | null
           updated_at?: string
@@ -44,13 +52,17 @@ export type Database = {
           application_deadline?: string | null
           company_name?: string
           created_at?: string
+          employment_type?: string | null
+          experience?: string | null
           id?: string
           job_description?: string | null
           job_title?: string
           job_type?: string
           location?: string
+          posted_time?: string | null
           requirements?: string | null
           responsibilities?: string | null
+          salary?: string | null
           salary_max?: number | null
           salary_min?: number | null
           updated_at?: string

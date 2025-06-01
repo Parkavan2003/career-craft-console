@@ -24,7 +24,7 @@ export const JobFilters = ({ onFilterChange }: JobFiltersProps) => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       {/* Search Bar */}
       <div className="flex items-center space-x-4 mb-8">
         <div className="flex-1 relative">

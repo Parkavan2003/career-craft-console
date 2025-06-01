@@ -39,13 +39,16 @@ export const JobCard = ({ job }: JobCardProps) => {
     return `https://ui-avatars.com/api/?name=${encodedName}&size=${logoSize}&background=2563eb&color=ffffff&bold=true&format=png&rounded=true`;
   };
 
+  const companyLogos = ["/download.jpg", "/tesla.png", "/zoho.png", "/amazon.png"];
+  const randomLogo = companyLogos[Math.floor(Math.random() * companyLogos.length)];
+
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 font-['Inter',_sans-serif]">
       {/* Header with Logo and Date */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center overflow-hidden shadow-lg">
-            <img 
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br flex items-center justify-center overflow-hidden shadow-lg">
+            {/* <img 
               src={getCompanyLogoUrl(job.company_name)}
               alt={`${job.company_name} logo`}
               className="w-full h-full object-cover rounded-xl"
@@ -58,7 +61,8 @@ export const JobCard = ({ job }: JobCardProps) => {
                   parent.innerHTML = `<span class="text-white font-bold text-lg">${getCompanyInitial(job.company_name)}</span>`;
                 }
               }}
-            />
+            /> */}
+            <img src="/download.jpg" alt="company_logo" />
           </div>
         </div>
         <Badge className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-medium border-0 hover:bg-blue-50">
@@ -67,7 +71,7 @@ export const JobCard = ({ job }: JobCardProps) => {
       </div>
       
       {/* Job Title */}
-      <h3 className="font-bold text-lg text-gray-900 mb-3 leading-tight">
+      <h3 className="font-semibold text-lg text-gray-900 mb-3 leading-tight">
         {job.job_title}
       </h3>
       
@@ -93,7 +97,7 @@ export const JobCard = ({ job }: JobCardProps) => {
       </p>
       
       {/* Apply Button */}
-      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl h-12 font-semibold transition-colors text-sm">
+      <Button className="w-full bg-blue-500 hover:bg-blue-700 text-white rounded-xl h-12 font-semibold transition-colors text-sm">
         Apply Now
       </Button>
     </div>

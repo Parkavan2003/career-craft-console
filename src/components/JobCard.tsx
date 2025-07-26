@@ -29,12 +29,11 @@ export const JobCard = ({ job }: JobCardProps) => {
     } else if (diffInSeconds < 86400) {
       const hours = Math.floor(diffInSeconds / 3600);
       return hours === 1 ? '1h ago' : `${hours}h ago`;
-    } else if (diffInSeconds < 2592000) {
+    } else if (diffInSeconds < 432000) { // 5 days in seconds
       const days = Math.floor(diffInSeconds / 86400);
       return days === 1 ? '1d ago' : `${days}d ago`;
     } else {
-      const months = Math.floor(diffInSeconds / 2592000);
-      return months === 1 ? '1mo ago' : `${months}mo ago`;
+      return '5d ago'; // Show 5 days ago for anything older
     }
   };
 

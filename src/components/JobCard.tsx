@@ -18,11 +18,24 @@ export const JobCard = ({ job }: JobCardProps) => {
     return 'Salary not specified';
   };
 
-  const formatDate = (dateString: string, jobId: string) => {
-    // Generate varied posting times based on job ID for consistent display
-    const dayVariations = ['1h Ago', '3h Ago', '8h Ago', '1d Ago', '2d Ago', '3d Ago', '5d Ago', '1w Ago'];
-    const index = parseInt(jobId) % dayVariations.length;
-    return dayVariations[index];
+  const formatDate = (dateString: string) => {
+    const now = new Date();
+    const jobDate = new Date(dateString);
+    const diffInSeconds = Math.floor((now.getTime() - jobDate.getTime()) / 1000);
+    
+    if (diffInSeconds < 3600) {
+      const minutes = Math.floor(diffInSeconds / 60);
+      return minutes <= 1 ? '1m ago' : `${minutes}m ago`;
+    } else if (diffInSeconds < 86400) {
+      const hours = Math.floor(diffInSeconds / 3600);
+      return hours === 1 ? '1h ago' : `${hours}h ago`;
+    } else if (diffInSeconds < 2592000) {
+      const days = Math.floor(diffInSeconds / 86400);
+      return days === 1 ? '1d ago' : `${days}d ago`;
+    } else {
+      const months = Math.floor(diffInSeconds / 2592000);
+      return months === 1 ? '1mo ago' : `${months}mo ago`;
+    }
   };
 
   const getCompanyInitial = (companyName: string) => {
@@ -61,7 +74,7 @@ export const JobCard = ({ job }: JobCardProps) => {
           </div>
         </div>
         <Badge className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-medium border-0 hover:bg-blue-50">
-          {formatDate(job.created_at, job.id)}
+          {formatDate(job.created_at)}
         </Badge>
       </div>
       

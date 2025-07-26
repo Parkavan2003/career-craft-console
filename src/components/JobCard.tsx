@@ -36,12 +36,6 @@ export const JobCard = ({ job }: JobCardProps) => {
     return `https://ui-avatars.com/api/?name=${encodedName}&size=${logoSize}&background=2563eb&color=ffffff&bold=true&format=png&rounded=true`;
   };
 
-  // Get a deterministic image based on job ID to ensure consistency
-  const getJobImage = (jobId: string) => {
-    const images = ["/download.jpg", "/tesla.png", "/zoho.png", "/amazon.png"];
-    const index = parseInt(jobId) % images.length;
-    return images[index];
-  };
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 font-['Inter',_sans-serif]">
@@ -63,7 +57,7 @@ export const JobCard = ({ job }: JobCardProps) => {
                 }
               }}
             /> */}
-            <img src={getJobImage(job.id)} alt="company_logo" className="w-full h-full object-cover rounded-xl" />
+            <img src="/download.jpg" alt="company_logo" className="w-full h-full object-cover rounded-xl" />
           </div>
         </div>
         <Badge className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-medium border-0 hover:bg-blue-50">
